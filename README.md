@@ -1,5 +1,11 @@
 # EXPLORATORY DATA ANALYSIS - CAR INVENTORY
 
+## Table of Content
+
+- [Project Overview](#project-overview)
+- [Results](#results)
+- [Recommendation](#recommendation)
+
 The Car Inventory Analysis project is designed to explore and analyze key insights from a dataset containing details about various cars, including their make, model, color, mileage, price, and cost. By applying data analysis and visualization techniques using Pandas, Numpy, Matplotlib, and Seaborn, the project aims to uncover trends, relationships, and key patterns within the dataset.
 
 ## Objectives 
@@ -63,7 +69,8 @@ Code Used
 
 Import Library and Dataset
 
-<pre> import pandas as pd
+<pre> 
+# import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -73,3 +80,37 @@ df = pd.read_excel('Car Inventory.xlsx')  # Ensure the Excel file is in the same
 
 # Display first few rows
 df.head()  </pre>
+
+Clean Dataset
+
+<pre>
+# Check for missing values
+print(df.isnull().sum())
+
+# Remove duplicates if any
+df = df.drop_duplicates()
+
+# Remove unwanted characters from numeric columns and convert to numbers
+df['Price'] = df['Price'].replace('[\$,]', '', regex=True).astype(float)
+df['Cost'] = df['Cost'].replace('[\$,]', '', regex=True).astype(float)
+df['Mileage'] = df['Mileage'].replace('[,]', '', regex=True).astype(int)
+
+# Verify data types
+print(df.dtypes) </pre>
+
+
+### Results
+
+Summary of Key Insights from the Car Inventory Analysis Price Trends:
+
+1. Car prices range: The car prices range widely, but most fall between $2,000 – $4,000. The average car price is around $3,000, indicating a focus on affordable used cars.
+2. Mileage vs. Price: Cars with lower mileage generally cost more, which is expected, there are a few high-mileage vehicles priced higher—possibly due to brand value or condition.
+3. Popular Brands: The most common brands in the inventory are Toyota, Ford, and Chevrolet. This may suggest either high customer demand or dealer preference for these brands.
+4. Car Color Preferences: Colors like Silver, Black, and White dominate the inventory. This can be useful in restocking and marketing based on color popularity.
+5. Profitability: The average profit margin differs by brand. Brands like Ford and Chevrolet seem to have higher average profits compared to others.
+
+
+### References
+
+[Car Dataset](https://docs.google.com/spreadsheets/d/148gzCAxQno4wlIj_tzgUIyDTG8y4ifRr/edit?usp=sharing&ouid=107969485968939728677&rtpof=true&sd=true)
+
